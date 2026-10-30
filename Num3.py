@@ -1,41 +1,31 @@
-def get_int(text: str) -> int:
+def get_float() -> float:
 
     while True:
-
         try:
-
-            a = int(input(f'Введите {text}\n'))
-
+            a = float(input(f'Введите A:\n'))
             if a <= 1:
-                print("\n\033[31m\033[1mЧИСЛО ДОЛЖНО БЫТЬ БОЛЬШЕ 1\033[0m\n")
-                continue
-
+                int('')
             return a
-        
         except ValueError:
-            
-            print("\n\033[31m\033[1mДОЛЖНО БЫТЬ ЧИСЛО\033[0m\n")
+            print("\n\033[31m\033[1mA - ЧИСЛО > 1\033[0m\n")
 
-flag = True
-while flag:
+while True:
     print('-'*50)
 
     print('Давайте найдём для какого минимального k:  1+(1/2)+(1/3)+...+(1/k) > A, где A>1')
     
-    a = get_int('A')
-    
-    if a<=1: print("\n\033[31m\033[1mN - целое и больше единицы\033[0m\n"); continue
+    A = get_float()
     
     k = 0
     s = 0
 
-    while s <= a:
+    while s <= A:
         k += 1
         s += 1 / k
 
-    print("K = {}\nСумма = {}".format(k, s))
+    print(f"\nK = {k}\nСумма = 1+(1/2)+(1/3)+...+(1/{k}) = {s} > {A}")
 
-    if input("еще раз? (y/n)\n").lower() not in ["y", 'да']:
-        flag = False
+    if input("\nеще раз? (y/n)\n").lower() not in ["y", 'да']:
+        break
 
 print("Усё")

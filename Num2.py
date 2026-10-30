@@ -1,31 +1,42 @@
-from math import factorial as fac
+from math import factorial as fac, e
 
-def get_int(text:str) -> int:
-
+def get_float() -> float:
     while True:
-
         try:
+            return float(input(f'Введите X:\n'))
+        except ValueError:
+            print("\033[31m\033[1mX ДОЛЖНО БЫТЬ ЧИСЛОМ\033[0m")
 
-            return int(input(f'Введите {text}\n'))
-        
-        except:
-            
-            print("\n\033[31m\033[1mДОЛЖНО БЫТЬ ЧИСЛО\033[0m\n")
+def get_int() -> int:
+    while True:
+        try:
+            n = int(input(f'Введите N:\n'))
+            if n > 0:
+                return n
+            else:
+                int("some word will make an error")
+        except ValueError:
+            print("\033[31m\033[1mN ДОЛЖНО БЫТЬ НАТУРАЛЬНЫМ ЧИСЛОМ\033[0m")
 
-flag = True
-while flag:
+
+while True:
     print('-'*50)
 
     print('Давайте выведем число, являющееся приближённым значением функции exp в точке X (чем больше N, тем точнее приближение)\n')
     
-    x = get_int('X')
-    n = get_int('N')
-
-    if n <= 0: print("\n\033[31m\033[1mN - целое и больше нуля\033[0m\n"); continue
+    x = get_float()
     
-    print(sum([(x**i)/fac(i) for i in range(n+1)]))
+    flag = True
+    while flag:
+        try:
+            n = get_int()
+            print('\nОтвет:', sum([(x**i)/fac(i) for i in range(n+1)]), f'\nТочное значение: e^"{x}" = {e**x}')
+            flag = False
+            
+        except OverflowError:
+            print('\033[31m\033[1mСЛИШКОМ БОЛЬШОЕ N\033[0m')
+            
+    if input("\nеще раз? (y/n)\n").lower() not in ["y", 'да']:
+        break
     
-    if input("еще раз? (y/n)\n").lower() not in ["y", 'да']:
-        flag = False
-
 print("Усё")

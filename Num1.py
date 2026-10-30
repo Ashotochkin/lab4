@@ -1,14 +1,20 @@
-def get_int(text:str) -> int:
-
+def get_float() -> float:
     while True:
-
         try:
+            return float(input(f'Введите A:\n'))
+        except ValueError:
+            print("\033[31m\033[1mA ДОЛЖНО БЫТЬ ЧИСЛОМ\033[0m")
 
-            return int(input(f'Введите {text}\n'))
-        
-        except:
-            
-            print("\n\033[31m\033[1mДОЛЖНО БЫТЬ ЧИСЛО\033[0m\n")
+def get_int() -> int:
+    while True:
+        try:
+            n = int(input(f'Введите N:\n'))
+            if n > 0:
+                return n
+            else:
+                int("some word will make an error")
+        except ValueError:
+            print("\033[31m\033[1mN ДОЛЖНО БЫТЬ НАТУРАЛЬНЫМ ЧИСЛОМ\033[0m")
 
 flag = True
 while flag:
@@ -16,12 +22,10 @@ while flag:
 
     print('Давайте выведем все целые степени числа A от 1 до N\n')
     
-    a = get_int('А')
-    n = get_int('N')
-
-    if n <= 0: print("\n\033[31m\033[1mN - целое и больше нуля\033[0m\n"); continue
+    a = get_float()
+    n = get_int()
     
-    print([a**i for i in range(1, n+1)])
+    print(f"\nВыводим '{a}'^t, где t=[1,...,{n}]", *[a**i for i in range(1, n+1)], sep='\n')
 
     if input("еще раз? (y/n)\n").lower() not in ["y", 'да']:
         flag = False
